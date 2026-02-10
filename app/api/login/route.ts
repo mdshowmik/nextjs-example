@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -19,7 +20,6 @@ export async function POST(req: Request){
       where:{ email }
     });
 
-    // Generic message (security best practice)
     if(!user){
       return NextResponse.json(
         { ok:false, message:"Wrong email or password" },
